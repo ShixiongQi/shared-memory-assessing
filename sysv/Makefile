@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-g -Wall
 EXES=shm_writer.exe shm_reader.exe shm_clean.exe
-DEPS=shm_common.h
+DEPS=shm_common.h timer.h
 OBJS=*.o
 DBGS=*.dSYM
 

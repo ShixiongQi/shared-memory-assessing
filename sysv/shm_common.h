@@ -7,7 +7,7 @@
  */
 
 #define PAGE_SIZE 4096 // 4K page size
-#define SHMEM_SIZE (1024 * PAGE_SIZE) // 4MB
+#define SHMEM_SIZE (2048 * PAGE_SIZE) // 4MB
 #define SHMEM_FLAGS (SHM_R | SHM_W)
 #define SHMKEY_FILE "shmkey.txt"
 

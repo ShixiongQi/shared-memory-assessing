@@ -1,6 +1,4 @@
-# Playing with Shared Memory
-
-A sample code showing the usage of shared memory using
+# Assessing different Shared Memory implementation
 
 1. [POSIX interfaces](posix)
 2. [System V interfaces](sysv)

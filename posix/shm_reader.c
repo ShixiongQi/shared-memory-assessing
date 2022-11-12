@@ -4,27 +4,37 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/stat.h>
+#include <string.h>
 
 #include "shm_common.h"
+#include "timer.h"
 
 int main(void) {
 
     void *shm_addr = NULL;
     int shm_fd = -1;
+    struct timespec t_start;
+    struct timespec t_end;
 
+    get_monotonic_time(&t_start);
     shm_fd = shm_open(SHM_NAME, O_RDONLY, SHM_MODE);
     if (shm_fd == -1) {
         perror("shm_open failed");
         return EXIT_FAILURE;
     }
+    get_monotonic_time(&t_end);
+    printf("[QLOG] shm_open latency: %ld\n", get_elapsed_time_nano(&t_start, &t_end));
 
+    get_monotonic_time(&t_start);
     shm_addr = mmap(NULL, SHM_SIZE, PROT_READ, MAP_SHARED, shm_fd, 0);
     if (shm_addr == MAP_FAILED) {
         perror("mmap with shm_fd failed");
         return EXIT_FAILURE;
     }
+    get_monotonic_time(&t_end);
+    printf("[QLOG] mmap latency: %ld\n", get_elapsed_time_nano(&t_start, &t_end));
 
-    printf("Reading from addr=%p, msg=%s\n", shm_addr, (char *)shm_addr);
+    printf("Reading from addr=%p, msg length=%ld\n", shm_addr, strlen((char *)shm_addr));
 
     // getting some stats about the shared memory just accessed.
     struct stat shmstat;

@@ -3,7 +3,7 @@ CFLAGS=-g -Wall
 EXES=shm_writer.exe shm_reader.exe
 DBGS=*.dSYM
 OBJS=*.o
-DEPS=shm_common.h
+DEPS=shm_common.h timer.h
 LIBS=
 
 # Add librt when running on linux
